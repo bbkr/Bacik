@@ -1,0 +1,59 @@
+/// Controls the flow.
+Orchestrator
+    events: Channel
+
+
+/// Records all entities and activities required for gathering results and resuming failed jobs.
+Journal
+
+/// Represents SQL query.
+Query
+    id
+    sql
+
+/// Represents database instance to run Queries on.
+Target
+    id
+    host
+    port
+    name
+
+/// Provides array of Queries to run.
+/// For example they can be read from file, STDIN, or loaded from Journal in case of resuming failed run.
+QueriesProvider
+    get_queries -> Vec<Query> // or Channel?
+
+/// Provides array of Targets to run.
+/// For example they can be read from file, STDIN, or loaded from Journal in case of resuming failed run.
+TargetProvider
+    get_targets -> Vec<Target> // or Channel
+
+/// Various components that displays progress information and handles interaction with user.
+UI
+
+
+
+//Flow of new run:
+// bacik --queries=interactive (default?) --targets=targets.json
+let ui = UI::new();
+let targets = Targets::FromJSONFile::new();
+journal = Journal::new();
+
+let orchestrator = Orchestrator::new( journal: Journal, query_provider: ui.get_queries, targets: targets.get_targets, partition_by: Option<Str> );
+
+Orchestrator::new(
+    for queries {
+        // save queries to Journal
+        // announce
+    }
+    for targets {
+        // save targets to journal
+        // announce
+    }
+    partition
+
+)
+
+Orchestrator.run(
+
+)

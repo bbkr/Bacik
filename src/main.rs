@@ -1,10 +1,9 @@
-use tokio;
-mod sqlite;
-use sqlite::SQLite;
+use bacik::journal;
 
-#[tokio::main]
-async fn main() {
-    println!("Hello, world!");
 
-    let x = SQLite::init().await.unwrap();
+fn main() {
+
+
+
+
 }
